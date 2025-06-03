@@ -12,7 +12,7 @@ british_irish_codes = [
     'uk',   # United Kingdom (nonstandard MARC)
     'wlk',  # Wales
     'nui',  # Northern Ireland (rare)
-    'e-ir', # Eire/Ireland (rare)
+    'e-ir', # Eire/Ireland (used in some special catalogs)
     ]
 
 excluded_genres = set([

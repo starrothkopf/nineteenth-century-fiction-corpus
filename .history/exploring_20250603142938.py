@@ -23,7 +23,7 @@ if 'author' in df.columns:
     print("\n most common authors:")
     print(df['author'].value_counts().head(15))
 
-# top places (no ireland?)
+# top places
 if 'place' in df.columns:
     print("\n most common place codes (MARC country codes):")
     print(df['place'].value_counts().head(10))

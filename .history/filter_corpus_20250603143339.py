@@ -6,14 +6,13 @@ manual = pd.read_csv('metadata/manual_title_subset.tsv', sep='\t', encoding='utf
 british_irish_codes = [    
     'enk',  # England
     'stk',  # Scotland
-    'ie',   # Ireland (inconsistent, might also be used for italy)
-    'irl',  # Ireland (ISO-aligned, not standard MARC)
+    'ie',   # Ireland (used inconsistently — might also be used for Italy)
+    'irl',  # Ireland (ISO-aligned, but not standard MARC — may not appear)
     'xxk',  # United Kingdom (general)
-    'uk',   # United Kingdom (nonstandard MARC)
+    'uk',   # United Kingdom (nonstandard but might appear)
     'wlk',  # Wales
-    'nui',  # Northern Ireland (rare)
-    'e-ir', # Eire/Ireland (rare)
-    ]
+    'nui',  # Northern Ireland (very rare)
+    'e-ir', # Eire/Ireland (used in some special catalogs)]
 
 excluded_genres = set([
         'short stories', 'bibliographies', 'autobiography', 'biography', 'publishers\' advertisements',

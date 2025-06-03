@@ -14,16 +14,15 @@ for genre, count in genre_counts.most_common(50):
 
 # pub years
 if 'inferreddate' in df.columns:
-    df['year_bucket'] = (df['inferreddate'] // 10 * 10).astype(int)
-    print("\n publication year distribution by decade:")
-    print(df['year_bucket'].value_counts().sort_index())
+    print("\n publication year distribution:")
+    print(df['inferreddate'].value_counts().sort_index().tail(20))  # or .head() for earliest years
 
 # top authors
 if 'author' in df.columns:
     print("\n most common authors:")
     print(df['author'].value_counts().head(15))
 
-# top places (no ireland?)
+#
 if 'place' in df.columns:
-    print("\n most common place codes (MARC country codes):")
+    print("\n🗺️ Most common place codes (MARC country codes):")
     print(df['place'].value_counts().head(10))
