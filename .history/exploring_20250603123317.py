@@ -1,7 +1,7 @@
 import pandas as pd
 from collections import Counter
 
-df = pd.read_csv('filtered_titlemeta.tsv', sep='\t', encoding='utf-8')
+df = pd.read_csv('filtered', sep='\t', encoding='utf-8')
 
 genre_series = df['genres'].dropna().astype(str).str.lower().str.split('|')
 all_genres = [g.strip() for sublist in genre_series for g in sublist]
