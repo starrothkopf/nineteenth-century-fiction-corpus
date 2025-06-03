@@ -5,19 +5,6 @@ manual = pd.read_csv('metadata/manual_title_subset.tsv', sep='\t', encoding='utf
 
 british_irish_codes = ['enk', 'stk', 'ie', 'uk', 'xxk', 'ir']
 
-excluded_genres = set([
-        'short stories', 'bibliographies', 'autobiography', 'biography', 'publishers\' advertisements',
-        'juvenile audience', 'juvenile works', 'history', 'publishers\' cloth bindings (binding)', 
-        'bookplates (provenance)', 'poetry', 'new york', 'new york (state)',
-    ])
-
-def filter_by_genre(df):
-    def is_valid(genres):
-        tags = [tag.strip().lower() for tag in str(genres).split('|')]
-        return all(tag not in excluded_genres for tag in tags)
-
-    return df[df['genres'].apply(is_valid)].copy()
-
 def clean_and_filter(df, name):
     print(f"\nProcessing: {name}")
     
@@ -32,11 +19,21 @@ def clean_and_filter(df, name):
     if 'category' in df.columns:
         df = df[df['category'] == 'longfiction']
 
-    df = filter_by_genre(df)
+    if 'genres' in df.columns: 
+        exclude_genres = ['short stories', 'humorous stories', 'adventure stories', 'western stories',
+                        'biography', 'autobiography', 'bibliographies', "publishers' advertisements",
+                        'juvenile literature', 'satire']
+        
+        def is_excluded(genres):
+            if pd.isna(genres): return False
+            genres_lower = genres.lower()
+            return any(ex in genres_lower for ex in exclude_genres)
+
+        df = df[~df['genres'].apply(is_excluded)].copy()
 
     df = df.drop_duplicates(subset=['author', 'shorttitle', 'inferreddate'])
 
-    cols_to_keep = ['author', 'inferreddate', 'gender', 'shorttitle', 'nationality', 'place', 'category', 'genres']
+    cols_to_keep = ['author', 'inferreddate', 'gender', 'shorttitle', 'nationality', 'place', 'category']
     df = df[[col for col in cols_to_keep if col in df.columns]]
     
     print(f"{name} final count: {len(df)} rows")

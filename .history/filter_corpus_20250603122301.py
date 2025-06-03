@@ -12,6 +12,7 @@ excluded_genres = set([
     ])
 
 def filter_by_genre(df):
+
     def is_valid(genres):
         tags = [tag.strip().lower() for tag in str(genres).split('|')]
         return all(tag not in excluded_genres for tag in tags)

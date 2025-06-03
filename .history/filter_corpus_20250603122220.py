@@ -7,11 +7,17 @@ british_irish_codes = ['enk', 'stk', 'ie', 'uk', 'xxk', 'ir']
 
 excluded_genres = set([
         'short stories', 'bibliographies', 'autobiography', 'biography', 'publishers\' advertisements',
-        'juvenile audience', 'juvenile works', 'history', 'publishers\' cloth bindings (binding)', 
-        'bookplates (provenance)', 'poetry', 'new york', 'new york (state)',
+        'juvenile audience', 'juvenile literature', 'juvenile works', 'history',
+        'publishers\' cloth bindings (binding)', 'bookplates (provenance)', 'poetry',
+        'black humor (literature)', 'new york', 'new york (state)',
+        'humorous stories', 'adventure stories',
+        'war stories', 'spy stories', 'western stories'
     ])
 
 def filter_by_genre(df):
+    if 'genres' not in df.columns:
+        return df 
+
     def is_valid(genres):
         tags = [tag.strip().lower() for tag in str(genres).split('|')]
         return all(tag not in excluded_genres for tag in tags)

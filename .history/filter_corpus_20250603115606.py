@@ -6,17 +6,21 @@ manual = pd.read_csv('metadata/manual_title_subset.tsv', sep='\t', encoding='utf
 british_irish_codes = ['enk', 'stk', 'ie', 'uk', 'xxk', 'ir']
 
 excluded_genres = set([
-        'short stories', 'bibliographies', 'autobiography', 'biography', 'publishers\' advertisements',
-        'juvenile audience', 'juvenile works', 'history', 'publishers\' cloth bindings (binding)', 
-        'bookplates (provenance)', 'poetry', 'new york', 'new york (state)',
-    ])
+    'short stories', 'bibliographies', 'autobiography', 'biography', 'publishers\' advertisements',
+    'juvenile audience', 'juvenile literature', 'juvenile works', 'history',
+    'publishers\' cloth bindings (binding)', 'bookplates (provenance)', 'poetry',
+    'black humor (literature)', 'new york', 'new york (state)'
+])
 
 def filter_by_genre(df):
-    def is_valid(genres):
-        tags = [tag.strip().lower() for tag in str(genres).split('|')]
-        return all(tag not in excluded_genres for tag in tags)
+    if 'genres' not in df.columns:
+        return df 
 
-    return df[df['genres'].apply(is_valid)].copy()
+    def is_relevant(genres):
+        tags = [tag.strip().lower() for tag in str(genres).split('|')]
+        return any(tag in relevant_genres for tag in tags)
+
+    return df[df['genres'].apply(is_relevant)].copy()
 
 def clean_and_filter(df, name):
     print(f"\nProcessing: {name}")
