@@ -16,8 +16,7 @@ def clean_and_filter(df, name):
     elif 'nationality' in df.columns:
         df = df[df['nationality'].str.lower().isin(british_irish_codes)]
 
-    if 'category' in df.columns:
-        df = df[df['category'] == 'longfiction']
+    df = df[df['category'] == 'longfiction']
 
     df = df.drop_duplicates(subset=['author', 'shorttitle', 'inferreddate'])
 

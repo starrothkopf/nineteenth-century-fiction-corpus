@@ -3,7 +3,7 @@ import pandas as pd
 titlemeta = pd.read_csv('metadata/titlemeta.tsv', sep='\t', encoding='utf-8')
 manual = pd.read_csv('metadata/manual_title_subset.tsv', sep='\t', encoding='utf-8')
 
-british_irish_codes = ['enk', 'stk', 'ie', 'uk', 'xxk', 'ir']
+british_irish_codes = ['enk', 'stk', 'ie', 'uk', 'xxk']
 
 def clean_and_filter(df, name):
     print(f"\nProcessing: {name}")
@@ -16,12 +16,9 @@ def clean_and_filter(df, name):
     elif 'nationality' in df.columns:
         df = df[df['nationality'].str.lower().isin(british_irish_codes)]
 
-    if 'category' in df.columns:
-        df = df[df['category'] == 'longfiction']
-
     df = df.drop_duplicates(subset=['author', 'shorttitle', 'inferreddate'])
 
-    cols_to_keep = ['author', 'inferreddate', 'gender', 'shorttitle', 'nationality', 'place', 'category']
+    cols_to_keep = ['author', 'inferreddate', 'gender', 'shorttitle', 'nationality', 'place']
     df = df[[col for col in cols_to_keep if col in df.columns]]
     
     print(f"{name} final count: {len(df)} rows")

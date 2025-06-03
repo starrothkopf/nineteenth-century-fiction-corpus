@@ -1,0 +1,28 @@
+import pandas as pd
+
+titlemeta = pd.read_csv('metadata/titlemeta.tsv', sep='\t', encoding='utf-8')
+manual = pd.read_csv('metadata/manual_title_subset.tsv', sep='\t', encoding='utf-8')
+
+
+# 19th century
+df = df[df['inferreddate'].between(1789, 1913, inclusive='both')]
+
+# remove non-fiction genres
+if 'genres' in df.columns:
+    exclude_terms = ['biography', 'travel', 'folklore', 'essays']
+    mask = ~df['genres'].fillna('').str.lower().str.contains('|'.join(exclude_terms))
+    df = df[mask]
+
+# british/irish
+british_irish_codes = ['enk', 'stk', 'ie', 'uk', 'xxk'] 
+df = df[df['place'].str.lower().isin(british_irish_codes)]
+
+# clean + deduplicate
+df = df[df['inferreddate'] > 0]
+df_dedup = df.drop_duplicates(subset=['author', 'shorttitle', 'inferreddate'])
+
+print(f"Deduplicated: from {len(df)} rows to {len(df_dedup)}")
+
+df_dedup.to_csv('filtered_deduplicated_nineteenth_century_fiction.tsv', sep='\t', index=False)
+
+print(f"Dataset saved. Total rows: {len(df)}")
