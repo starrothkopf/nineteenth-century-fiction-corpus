@@ -5,8 +5,9 @@ df = pd.read_csv('metadata/volumemeta.tsv', sep='\t', encoding='utf-8')
 # 19th century
 df = df[df['inferreddate'].between(1789, 1913, inclusive='both')]
 
-# remove non-fiction genres
+# genre double check
 if 'genres' in df.columns:
+    # remove non-fiction genres
     exclude_terms = ['biography', 'travel', 'folklore', 'essays']
     mask = ~df['genres'].fillna('').str.lower().str.contains('|'.join(exclude_terms))
     df = df[mask]
