@@ -1,0 +1,25 @@
+import pandas as pd
+
+df_hathi = pd.read_csv("Enriched_Feature_Set_Fiction.csv")
+df_noveltm = pd.read_csv("filtered_titlemeta_with_gender.tsv", sep="\t")
+
+df_hathi['docid'] = df_hathi['htid']  
+# df_noveltm['htid'] = df_noveltm['docid'] if you prefer that way
+
+# Merge on docid
+df_merged = df_hathi.merge(
+    df_noveltm[
+        ['docid', 'author', 'inferreddate', 'enumcron', 'volnum', 'nonficprob',
+         'place', 'genres', 'first_name', 'estimated_gender']
+    ],
+    on='docid',
+    how='inner'  # Only keep rows where docid is in both
+)
+
+# Save the result
+df_merged.to_csv("marged_hathi1m_with_novelmeta.csv", index=False)
+
+# Print summary
+print(f"Merged dataset contains {len(df_merged)} rows.")
+print("Sample:")
+print(df_merged.head())
