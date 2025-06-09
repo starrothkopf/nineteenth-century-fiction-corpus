@@ -1,0 +1,31 @@
+import pandas as pd
+from collections import Counter
+
+df = pd.read_csv('merged_metadata_with_ef.csv', sep='\t')
+print(f"\nTotal entries: {len(df)}")
+
+genre_series = df['genres'].dropna().astype(str).str.lower().str.split('|')
+all_genres = [g.strip() for sublist in genre_series for g in sublist]
+genre_counts = Counter(all_genres)
+
+# top genres
+for genre, count in genre_counts.most_common(50):
+    print(f"{genre}: {count}")
+
+# pub years
+if 'inferreddate' in df.columns:
+    df['year_bucket'] = (df['inferreddate'] // 10 * 10).astype(int)
+    print("\n publication year distribution by decade:")
+    print(df['year_bucket'].value_counts().sort_index())
+
+# top authors
+if 'author' in df.columns:
+    print("\n most common authors:")
+    print(df['author'].value_counts().head(15))
+
+# top places (no ireland?)
+if 'place' in df.columns:
+    print("\n most common MARC country codes:")
+    print(df['place'].value_counts().head(10))
+
+df['docid'].dropna().to_csv('my_docids.txt', index=False, header=False)

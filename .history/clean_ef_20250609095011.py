@@ -1,0 +1,20 @@
+import pandas as pd
+import ast
+
+df = pd.read_csv("ef_features_summary.csv")
+
+def simplify_genre(genre_str):
+    try:
+        genres = ast.literal_eval(genre_str)
+        if 'fiction' in [g.lower() for g in genres]:
+            return 'fiction'
+        else:
+            return 'unknown'
+    except:
+        return 'unknown'
+
+df['genre'] = df['genre'].apply(simplify_genre)
+
+df.to_csv("ef_features_summary_cleaned.csv", index=False)
+
+print(df['genre'].value_counts())
