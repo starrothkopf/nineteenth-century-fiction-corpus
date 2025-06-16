@@ -1,9 +1,15 @@
-NovelTM Datasets for English-Language Fiction, 1700-2009
+Filtered Subset of NovelTM Dataset for English-Language Fiction, 1789-1913
 ========================================================
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3766610.svg)](https://doi.org/10.5281/zenodo.3766610)
 
-Metadata for 210,305 volumes in HathiTrust that have been identified as likely to contain English-language fiction.
+Metadata for 9,906 volumes in HathiTrust that have been identified as likely to contain English-language British/Irish fiction.
+
+Metadata from NovelTM: docid,oldauthor,author,authordate,inferreddate,latestcomp,datetype,startdate,enddate,imprint,imprintdate,contents,genres,subjects,geographics,locnum,oclc,place,recordid,instances,allcopiesofwork,copiesin25yrs,enumcron,volnum,title,parttitle,earlyedition,shorttitle,nonficprob,juvenileprob
+- 
+
+Metadata from HathiTrust Extracted Features: avg_sentence_count,var_sentence_count,avg_line_count,var_line_count,avg_tokens_per_page,var_tokens_per_page,cap_alpha_freq,genre_tag,lcc_category
+
 
 For a fuller description of this data, see [the accompanying article in the *Journal of Cultural Analytics* by Ted Underwood, Patrick Kimutis, and Jessica Witte.](https://culturalanalytics.org/article/13147-noveltm-datasets-for-english-language-fiction-1700-2009) Levels of error are described statistically in that article. The authors do not plan to correct details in the dataset. This is a snapshot of a particular (imperfect) state of our knowledge circa 2019, not a resource we intend to update and maintain in perpetuity.
 
