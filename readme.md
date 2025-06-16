@@ -5,13 +5,72 @@ Filtered Subset of NovelTM Dataset for English-Language Fiction, 1789-1913
 
 Metadata for 9,906 volumes in HathiTrust that have been identified as likely to contain English-language British/Irish fiction.
 
-Metadata from NovelTM: docid,oldauthor,author,authordate,inferreddate,latestcomp,datetype,startdate,enddate,imprint,imprintdate,contents,genres,subjects,geographics,locnum,oclc,place,recordid,instances,allcopiesofwork,copiesin25yrs,enumcron,volnum,title,parttitle,earlyedition,shorttitle,nonficprob,juvenileprob
-- 
+Metadata from NovelTM
+-
+docid,oldauthor,author,authordate,inferreddate,latestcomp,datetype,startdate,enddate,imprint,imprintdate,contents,genres,subjects,geographics,locnum,oclc,place,recordid,instances,allcopiesofwork,copiesin25yrs,enumcron,volnum,title,parttitle,earlyedition,shorttitle,nonficprob,juvenileprob
+- "genres" are very incomplete from the Library of Congress, see the top 5:
+novel: 62
+electronic books: 5
+dime novels: 5
+mixed: 3
+translations: 3
+three deckers: 3
+- "nonficprob" ranges around 0.1-0.3
+- For a fuller description of this data, see [the accompanying article in the *Journal of Cultural Analytics* by Ted Underwood, Patrick Kimutis, and Jessica Witte.](https://culturalanalytics.org/article/13147-noveltm-datasets-for-english-language-fiction-1700-2009) Levels of error are described statistically in that article. The authors do not plan to correct details in the dataset. This is a snapshot of a particular (imperfect) state of our knowledge circa 2019, not a resource we intend to update and maintain in perpetuity.
 
-Metadata from HathiTrust Extracted Features: avg_sentence_count,var_sentence_count,avg_line_count,var_line_count,avg_tokens_per_page,var_tokens_per_page,cap_alpha_freq,genre_tag,lcc_category
+Metadata from HathiTrust Extracted Features
+-
+avg_sentence_count,var_sentence_count,avg_line_count,var_line_count,avg_tokens_per_page,var_tokens_per_page,cap_alpha_freq,genre_tag,lcc_category
+- "genre_tag" labels from Hathi Trust are either "fiction" or "unknown" (fiction: 5682, unknown: 4178)
+- "lcc_category" labels are again very incomplete (unknown: 8356) from the Library of Congress, see the top 3:
+fiction and juvenile belles lettres: 932
+english literature: 609
+great britain: 38
+literature (general): 30
+the family. marriage. women: 7
 
+Basic Analytics
+-
+number of authors: 4089
 
-For a fuller description of this data, see [the accompanying article in the *Journal of Cultural Analytics* by Ted Underwood, Patrick Kimutis, and Jessica Witte.](https://culturalanalytics.org/article/13147-noveltm-datasets-for-english-language-fiction-1700-2009) Levels of error are described statistically in that article. The authors do not plan to correct details in the dataset. This is a snapshot of a particular (imperfect) state of our knowledge circa 2019, not a resource we intend to update and maintain in perpetuity.
+--- estimated gender distribution ---
+https://pypi.org/project/gender-guesser/
+estimated_gender
+m          5401
+f          2305
+unknown    2200
+
+--- publication year distribution by decade ---
+year_bucket
+1780       9
+1790     104
+1800     267
+1810     306
+1820     556
+1830     561
+1840     612
+1850     639
+1860     770
+1870     850
+1880    1273
+1890    1737
+1900    1608
+1910     614
+
+avg nonfiction probability: 0.26
+avg juvenile probability: 0.17
+
+--- textual features summary ---
+       avg_sentence_count  avg_line_count  ...  var_tokens_per_page  cap_alpha_freq
+count         9904.000000     9906.000000  ...         9.906000e+03     9906.000000
+mean            13.481955       31.980547  ...         8.886300e+03        2.352107
+std              9.160406       17.004703  ...         2.629906e+04        1.777580
+min              1.062500        4.286957  ...         6.138677e+00        0.000000
+25%              8.357319       24.780179  ...         2.000017e+03        1.700000
+50%             11.250402       28.577789  ...         3.992647e+03        2.100000
+75%             16.059465       34.562380  ...         7.794762e+03        2.600000
+max            327.942987      580.456916  ...         1.125610e+06       41.700000
+
 
 The [metadata itself](https://github.com/tedunderwood/noveltmmeta/tree/master/metadata)
 -------------------
