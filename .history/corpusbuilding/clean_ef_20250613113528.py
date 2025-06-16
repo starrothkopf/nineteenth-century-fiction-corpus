@@ -1,0 +1,53 @@
+import pandas as pd
+import ast
+import numpy as np
+
+# Load CSV
+df = pd.read_csv("/Users/starrothkopf/Desktop/HDW/noveltmmeta/corpusbuilding/ef_rich_features_summary.csv", dtype=str)
+
+# Convert numeric columns
+numeric_cols = [
+    'avg_sentence_count', 'var_sentence_count',
+    'avg_line_count', 'var_line_count',
+    'avg_tokens_per_page', 'var_tokens_per_page',
+    'page_count'
+]
+for col in numeric_cols:
+    df[col] = pd.to_numeric(df[col], errors='coerce')
+
+# Fix cap_alpha_freq: extract mean from Series string
+def extract_mean_cap_alpha(val):
+    if isinstance(val, str) and "Name:" in val:
+        try:
+            # Only process the part before "Name:"
+            lines = val.split("Name:")[0].strip().split("\n")
+            values = [int(line.strip().split()[-1]) for line in lines if line.strip()]
+            return np.mean(values)
+        except Exception:
+            return np.nan
+    try:
+        return float(val)
+    except:
+        return np.nan
+
+df['cap_alpha_freq'] = df['cap_alpha_freq'].apply(extract_mean_cap_alpha)
+
+# Parse list columns
+def parse_list(val):
+    if pd.isna(val) or val.strip() in ("", "[]"):
+        return []
+    try:
+        parsed = ast.literal_eval(val)
+        if isinstance(parsed, list):
+            return parsed
+        else:
+            return [parsed]
+    except Exception:
+        return [val.strip()]
+
+df['genre_tag'] = df['genre_tag'].apply(parse_list)
+df['lcc_category'] = df['lcc_category'].apply(parse_list)
+
+# Save cleaned file
+df.to_csv("ef_rich_features_cleaned.csv", index=False)
+print("Cleaned CSV saved as ef_rich_features_cleaned.csv")

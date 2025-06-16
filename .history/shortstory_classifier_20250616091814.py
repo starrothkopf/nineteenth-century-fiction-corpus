@@ -1,0 +1,36 @@
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+
+# Load the labeled data
+df = pd.read_csv("rich_noveltm_ef_labeled.csv")
+
+# Use only rows that are already labeled (1 or 0)
+df_labeled = df[df['shortstory'].isin([0, 1])].copy()
+
+# Select features to use — tweak this list as needed
+feature_cols = [
+    'avg_sentence_count', 'var_sentence_count',
+    'avg_line_count', 'var_line_count',
+    'avg_tokens_per_page', 'var_tokens_per_page',
+    'cap_alpha_freq'
+]
+
+# Drop any rows with missing values in features
+df_labeled = df_labeled.dropna(subset=feature_cols + ['shortstory'])
+
+# Define X and y
+X = df_labeled[feature_cols]
+y = df_labeled['shortstory']
+
+# Split for quick evaluation
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.2, random_state=42)
+
+# Train classifier
+clf = RandomForestClassifier(n_estimators=100, random_state=42)
+clf.fit(X_train, y_train)
+
+# Evaluate
+y_pred = clf.predict(X_test)
+print(classification_report(y_test, y_pred))

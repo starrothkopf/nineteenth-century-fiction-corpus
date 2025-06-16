@@ -1,0 +1,18 @@
+import pandas as pd
+import re
+
+df = pd.read_csv("ef_rich_features_filtered.csv")
+
+
+pattern = r'\b(?:' + '|'.join(re.escape(k) for k in keywords) + r')\b'
+pattern = pattern.lower()
+
+# Combine title-related fields and convert to lowercase
+title_fields = df[['title', 'parttitle', 'shorttitle']].fillna("").astype(str).apply(lambda x: ' '.join(x), axis=1).str.lower()
+
+# Filter: titles that contain story-collection keywords
+df_seed = df[title_fields.str.contains(pattern, regex=True)]
+
+# Save to a file
+df_seed.to_csv("short_story_seed_volumes.csv", index=False)
+print(f"Identified {len(df_seed)} volumes likely to be short story collections.")
