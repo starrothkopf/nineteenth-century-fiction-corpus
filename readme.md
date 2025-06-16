@@ -3,6 +3,8 @@ Filtered Subset of NovelTM Dataset for English-Language Fiction, 1789-1913
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3766610.svg)](https://doi.org/10.5281/zenodo.3766610)
 
+rich_noveltm_ef_filtered.csv
+-
 Metadata for 9,906 volumes in HathiTrust that have been identified as likely to contain English-language British/Irish fiction.
 
 Metadata from NovelTM
