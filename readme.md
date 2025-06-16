@@ -24,12 +24,30 @@ Metadata from HathiTrust Extracted Features
 -
 avg_sentence_count,var_sentence_count,avg_line_count,var_line_count,avg_tokens_per_page,var_tokens_per_page,cap_alpha_freq,genre_tag,lcc_category
 - "genre_tag" labels from Hathi Trust are either "fiction" or "unknown" (fiction: 5682, unknown: 4178)
+- blocked_genres = {
+    "biography", "autobiography", "bibliography", "dictionary", "encyclopedia",
+    "survey of literature", "legal article", "government publication",
+    "law report or digest", "catalog"
+}
 - "lcc_category" labels are again very incomplete (unknown: 8356) from the Library of Congress, see the top 3:
 fiction and juvenile belles lettres: 932
 english literature: 609
 great britain: 38
 literature (general): 30
 the family. marriage. women: 7
+- blocked_lcc = {
+    "french literature - italian literature - spanish literature - portuguese literature",
+    "american literature",
+    "france - andorra - monaco",
+    "german literature - dutch literature - flemish literature since 1830 - afrikaans literature - scandinavian literature - old norse literature:old icelandic and old norwegian - modern icelandic literature - faroese literature - danish literature - norwegian literature - swedish literature",
+    "asia", "africa", "hunting sports", "oceania (south seas)",
+    "history (general)", "psychology",
+    "languages and literatures of eastern asia, africa, oceania",
+    "history of the americas",
+    "oriental languages and literatures",
+    "british america (including canada)",
+    "latin america. spanish america",
+    "united states local history",
 
 Basic Analytics
 -
