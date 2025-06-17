@@ -5,7 +5,7 @@ Filtered Subset of NovelTM Dataset for English-Language Fiction, 1789-1913
 
 rich_noveltm_ef_filtered.csv
 -
-Metadata for 9,906 volumes in HathiTrust that have been identified as likely to contain English-language British/Irish fiction.
+Metadata for 9,906 volumes in HathiTrust that have been identified as likely to contain English-language British/Irish fiction. All of the aquisition code belongs to Ted Underwood et. al and is grouped in /tedunderwood. My additions are further filtering and analysis.
 
 Metadata from NovelTM
 -
