@@ -19,6 +19,27 @@ translations: 3
 three deckers: 3
 - "nonficprob" ranges around 0.1-0.3
 - For a fuller description of this data, see [the accompanying article in the *Journal of Cultural Analytics* by Ted Underwood, Patrick Kimutis, and Jessica Witte.](https://culturalanalytics.org/article/13147-noveltm-datasets-for-english-language-fiction-1700-2009) Levels of error are described statistically in that article. The authors do not plan to correct details in the dataset. This is a snapshot of a particular (imperfect) state of our knowledge circa 2019, not a resource we intend to update and maintain in perpetuity.
+- Appears to have no volumes published in Ireland (Dublin):                        city  count
+0                    london   8820
+1                 edinburgh    387
+2              london [etc.     48
+3                  new york     43
+4                   glasgow     40
+5                    oxford     30
+6               westminster     25
+7                   bristol     24
+8                     lond.     17
+9                manchester     16
+10                   boston      9
+11                  london       9
+12                cambridge      9
+13            london, [eng.      8
+14                 chiswick      7
+15      london and new york      7
+16                liverpool      7
+17          edinburgh [etc.      7
+18  london|hutchinson|19--?      6
+19         london, new york      6
 
 Metadata from HathiTrust Extracted Features
 -
